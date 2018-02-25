@@ -1,9 +1,61 @@
 import React, { Component } from 'react';
+import Cards from './components/Cards';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+        Cards:[]
+    }
+  }
+
+  componentWillMount() {
+    this.setState({onlineCards: [
+        {
+          id: "1234",
+          title:  "#4 Combo -Large",
+          detailsList: "-Dr. Pepper"
+        },
+        {
+          id: "12345",
+          title:  "#5 Combo -Large",
+          detailsList: "-Chicken Sandiwch"
+        },
+        {
+          id: "123456",
+          title:  "#6 Combo -Large",
+          detailsList: "-Fries"
+        }
+      ]});
+      this.setState({inStoreCards: [
+          {
+            id: "1",
+            title:  "#4 Combo -Large",
+            detailsList: "-Dr. Pepper"
+          },
+          {
+            id: "2",
+            title:  "#5 Combo -Large",
+            detailsList: "-Chicken Sandiwch"
+          },
+          {
+            id: "3",
+            title:  "#6 Combo -Large",
+            detailsList: "-Fries"
+          }
+        ]});
+        this.setState({phoneCards: [
+            {
+              id: "666666",
+              title:  "#4 Combo -Large",
+              detailsList: "-Dr. Pepper"
+            },
+        ]});
+  }
   render() {
     return (
+      <div className="App">
       <div class="order-view"
         className="App">
         <header className="App-header">
@@ -17,16 +69,7 @@ class App extends Component {
                 <div class="container">
                   <div class="row sub-sections">
                     <div class="col-xs orders">
-                      <div class="card">
-                        <div class="card-block">
-                          <h6 class="card-title">#42332</h6>
-                          <h8 class="card-subtitle mb-2 text-muted">#4 Combo -Large</h8>
-                          <p class="card-text">
-                            -Dr. Pepper <br />-Chicken Sandiwch <br />-Fries
-                          </p>
-                        <button class="btn">Order Complete</button>
-                        </div>
-                      </div>
+                      <Cards cards={this.state.onlineCards} />
                     </div>
                     <div class="col-xs orders">
                     </div>
@@ -38,16 +81,7 @@ class App extends Component {
                 <div class="container">
                   <div class="row sub-sections">
                     <div class="col-xs orders">
-                      <div class="card">
-                        <div class="card-block">
-                          <h6 class="card-title">#42332</h6>
-                          <h8 class="card-subtitle mb-2 text-muted">#4 Combo -Large</h8>
-                          <p class="card-text">
-                            -Dr. Pepper <br />-Chicken Sandiwch <br />-Fries
-                          </p>
-                        <button class="btn">Order Complete</button>
-                        </div>
-                      </div>
+                      <Cards cards={this.state.inStoreCards} />
                     </div>
                     <div class="col-xs orders">
                     </div>
@@ -59,16 +93,7 @@ class App extends Component {
                 <div class="container">
                   <div class="row sub-sections">
                     <div class="col-xs orders">
-                      <div class="card">
-                        <div class="card-block">
-                          <h6 class="card-title">#42332</h6>
-                          <h8 class="card-subtitle mb-2 text-muted">#4 Combo -Large</h8>
-                          <p class="card-text">
-                            -Dr. Pepper <br />-Chicken Sandiwch <br />-Fries
-                          </p>
-                        <button class="btn">Order Complete</button>
-                        </div>
-                      </div>
+                        <Cards cards={this.state.phoneCards} />
                     </div>
                     <div class="col-xs orders">
                     </div>
@@ -78,6 +103,7 @@ class App extends Component {
           </div>
         </div>
       </div>
+    </div>
     </div>
     );
   }
