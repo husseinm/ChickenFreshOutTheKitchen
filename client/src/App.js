@@ -1,10 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
-import {GridList, GridTile} from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import OrderCards from './components/OrderCards';
@@ -77,7 +73,6 @@ const App = ({
   <MuiThemeProvider>
     <AppBar
     title="ChickenFreshOutTheKitchen"
-    iconClassNameRight="muidocs-icon-navigation-expand-more"
     />
 
     <div className="App">
