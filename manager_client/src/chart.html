@@ -17,7 +17,6 @@
   <script>
     let barChart = document.getElementById('barChart').getContext('2d');
     // Global Options
-    //Ash is a failure and a disappointment
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 18;
     Chart.defaults.global.defaultFontColor = '#777';
@@ -54,90 +53,6 @@
         title:{
           display:true,
           text:'Orders placed by day',
-          fontSize:25
-        },
-        legend:{
-          display:true,
-          position:'top',
-          labels:{
-            fontColor:'#001'
-          }
-        },
-        layout:{
-          padding:{
-            left:0,
-            right:0,
-            bottom:0,
-            top:0
-          }
-        },
-        tooltips:{
-          enabled:true
-        }
-      }
-    });
-  </script>
-</body>
-</html>
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <title>My Chart.js Chart</title>
-</head>
-<body>
-  <div class="container">
-    <canvas id="barChart"></canvas>
-  </div>
-
-  <script>
-    let barChart = document.getElementById('barChart').getContext('2d');
-    // Global Options
-    //Ash is a failure and a disappointment
-    Chart.defaults.global.defaultFontFamily = 'Lato';
-    Chart.defaults.global.defaultFontSize = 18;
-    Chart.defaults.global.defaultFontColor = '#777';
-
-    let massPopChart = new Chart(barChart, {
-      type:'horizontalBar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-      data:{
-        labels:['Monday','Tuesday','Wednesday','Thursday','Friday'],
-        datasets:[{
-          label:'Orders',
-          data:[
-          34,
-          42,
-          56,
-          54,
-          67
-          ],
-          backgroundColor:'blue',
-          backgroundColor:
-          [
-            'rgba(255,99,132,0.6)',
-            'rgba(255,99,132,0.6)',
-            'rgba(100,,132,0.6)',
-            'rgba(123,45,100,1)',
-            'rgba(100,200,150,1)',
-          ],
-          borderWidth:1,
-          borderColor:'#777',
-          hoverBorderWidth:3,
-          hoverBorderColor:'#000'
-        }]
-      },
-      options:{
-        title:{
-          display:true,
-          text:'Stff',
           fontSize:25
         },
         legend:{
