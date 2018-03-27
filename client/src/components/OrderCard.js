@@ -28,12 +28,17 @@ const OrderCard = ({ order, markOrderComplete }) => (
 
 const OrderCard = ({ order, markOrderComplete }) => (
   <MuiThemeProvider>
-  <Card>
+  <Card
+    style={{
+      margin: '0 auto',
+      border: '2px solid #424242',
+    }}>
     <CardHeader
       title={order.id}
       actAsExpander={true}
       showExpandableButton={true}
-    />
+      >
+    </CardHeader>
     <CardTitle
       title={order.title}
     />
