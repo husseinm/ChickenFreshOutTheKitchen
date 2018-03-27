@@ -17,15 +17,15 @@ class SignUp extends Component {
     state = {
         state: {
             value: ''
-        },
-        city: {
-            value: '',
-            error: ''
-        },
-        zipCode: {
-            value: '',
-            error: ''
         }
+        // city: {
+        //     value: '',
+        //     error: ''
+        // },
+        // zipCode: {
+        //     value: '',
+        //     error: ''
+        // }
     };
 
     handleChange = (event, index, value) => this.setState({ value });
@@ -35,9 +35,6 @@ class SignUp extends Component {
                 <div className="center">
                     <div className="right">
                         <SignIn />
-                    </div>
-                    <div className="top_margin">
-                        <Divider />
                     </div>
                     <div className="top_margin">
                         <h2 className="top_margin">Sign Up</h2>
@@ -102,7 +99,7 @@ class SignUp extends Component {
                             </div>
                             <div>
                                 <TextField
-                                    value={this.state.city.value}
+                                    //value={this.state.city.value}
                                     className='margin-2'
                                     hintText="City"
                                     floatingLabelText="City"
@@ -112,13 +109,13 @@ class SignUp extends Component {
                                     id='city'
                                 />
                                 <TextField
-                                    value={this.state.zipCode.value}
+                                    //value={this.state.zipCode.value}
                                     className='margin-2'
                                     hintText="ZIP/Postal Code"
                                     floatingLabelText="ZIP/Postal Code"
-                                    onChange={(event) => this.onChangeHandler(event)}
-                                    onBlur={(event) => this.onBlurHandler(event)}
-                                    errorText={this.state.zipCode.error}
+                                    //onChange={(event) => this.onChangeHandler(event)}
+                                    //onBlur={(event) => this.onBlurHandler(event)}
+                                    //errorText={this.state.zipCode.error}
                                     id='zipCode'
                                 />
                             </div>
