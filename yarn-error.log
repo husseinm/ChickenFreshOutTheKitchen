@@ -1,0 +1,32 @@
+Arguments: 
+  /Users/mahdi/.nvm/versions/node/v8.9.4/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js run start
+
+PATH: 
+  /Users/mahdi/.rvm/gems/ruby-2.4.0/bin:/Users/mahdi/.rvm/gems/ruby-2.4.0@global/bin:/Users/mahdi/.rvm/rubies/ruby-2.4.0/bin:/Users/mahdi/.avn/bin:/Users/mahdi/.nvm/versions/node/v8.9.4/bin:/Users/mahdi/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/opt/X11/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/mahdi/.rvm/gems/ruby-2.4.0/bin:/Users/mahdi/.rvm/gems/ruby-2.4.0@global/bin:/Users/mahdi/.rvm/rubies/ruby-2.4.0/bin:/Users/mahdi/.avn/bin:/Users/mahdi/.cargo/bin:/Users/mahdi/Library/Android/sdk/tools:/Users/mahdi/Library/Android/sdk/platform-tools:/Users/mahdi/.rvm/bin:/Users/mahdi/Library/Android/sdk/tools:/Users/mahdi/Library/Android/sdk/platform-tools:/Users/mahdi/.rvm/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.9.4
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Couldn't find a package.json file in "/Users/mahdi/Documents/personal_code/js/ChickenFreshOutTheKitchen"
+      at new MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
+      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:40048:15
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:98:30)
+      at /usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:109:13
+      at <anonymous>

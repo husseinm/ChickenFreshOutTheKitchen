@@ -1,52 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import awsIot from 'aws-iot-device-sdk';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import { InitiateAppSocketAC } from './actions/app';
 
 import OrderCards from './components/OrderCards';
 
 import './App.css';
 
-/*
 class App extends Component {
   componentDidMount() {
-    let client, iotTopic;
-    const IoT = {
-      connect: (topic, iotEndpoint, region, accessKey, secretKey, sessionToken) => {
-        iotTopic = topic;
-const App = ({
-  addOrder,
-  onlineOrders,
-  instoreOrders,
-  pickupOrders
-}) => (
-  <div className="App">
-    <header className="App-header">
-      <h1 className="App-title"><em>Chicken Fresh Out The Kitchen</em></h1>
-    </header>
->>>>>>> ad477113800ab18d7af8ccbe12d91e67919741b4
-
-        // connect
-        client = awsIot.device({
-          region: region,
-          protocol: 'wss',
-          accessKeyId: accessKey,
-          secretKey: secretKey,
-          sessionToken: sessionToken,
-          port: 443,
-          host: iotEndpoint
-        });
-
-        client.on('connect', () => { client.subcribe(iotTopic) });
-        client.on('message', console.log);
-        client.on('close', () => console.log('Connection Failed'));
-      },
-
-      send: (message) => {
-        client.publish(iotTopic, message); // send messages
-      }
-    };
+    this.props.connectToServer()
   }
 
   render() {
@@ -56,42 +21,43 @@ const App = ({
       instoreOrders,
       pickupOrders
     } = this.props;
-
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title"><em>Chicken Fresh Out The Kitchen</em></h1>
-        </header>
+      <MuiThemeProvider>
+        <AppBar
+          title="ChickenFreshOutTheKitchen"
+        />
 
-        <div className="sub-title">
-          <div className="container">
-            <div className="row sections">
-              <div className="col-sm col1 rounded">
-                <h4>Online</h4>
-                <div className="container">
-                  <div className="row sub-sections">
-                    <div className="col-xs orders">
-                      <OrderCards orders={onlineOrders} />
+        <div className="App">
+          <div className="sub-title">
+            <div className="container">
+              <div className="row sections">
+                <div className="col-sm col1 rounded">
+                  <h4>Online</h4>
+                  <div className="container">
+                    <div className="row sub-sections">
+                      <div className="col-xs orders">
+                        <OrderCards orders={onlineOrders} />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-sm col2 rounded">
-                <h4>In-store</h4>
-                <div className="container">
-                  <div className="row sub-sections">
-                    <div className="col-xs orders">
-                      <OrderCards orders={instoreOrders} />
+                <div className="col-sm col2 rounded">
+                  <h4>In-store</h4>
+                  <div className="container">
+                    <div className="row sub-sections">
+                      <div className="col-xs orders">
+                        <OrderCards orders={instoreOrders} />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-sm col3 rounded">
-                <h4>Pickup</h4>
-                <div className="container">
-                  <div className="row sub-sections">
-                    <div className="col-xs orders">
-                      <OrderCards orders={pickupOrders} />
+                <div className="col-sm col3 rounded">
+                  <h4>Pickup</h4>
+                  <div className="container">
+                    <div className="row sub-sections">
+                      <div className="col-xs orders">
+                        <OrderCards orders={pickupOrders} />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -99,68 +65,15 @@ const App = ({
             </div>
           </div>
         </div>
-      </div>
+
+      </MuiThemeProvider>
     )
   }
 }
-    </div>
-  </div>
-)
-*/
 
-
-const App = ({
-  addOrder,
-  onlineOrders,
-  instoreOrders,
-  pickupOrders
-}) => (
-  <MuiThemeProvider>
-    <AppBar
-    title="ChickenFreshOutTheKitchen"
-    />
-
-    <div className="App">
-      <div className="sub-title">
-        <div className="container">
-          <div className="row sections">
-            <div className="col-sm col1 rounded">
-              <h4>Online</h4>
-              <div className="container">
-                <div className="row sub-sections">
-                  <div className="col-xs orders">
-                    <OrderCards orders={onlineOrders} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm col2 rounded">
-              <h4>In-store</h4>
-              <div className="container">
-                <div className="row sub-sections">
-                  <div className="col-xs orders">
-                    <OrderCards orders={instoreOrders} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm col3 rounded">
-              <h4>Pickup</h4>
-              <div className="container">
-                <div className="row sub-sections">
-                  <div className="col-xs orders">
-                    <OrderCards orders={pickupOrders} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </MuiThemeProvider>
-)
+const mapDispatchToProps = (dispatch, originalProps) => ({
+  connectToServer: () => dispatch(InitiateAppSocketAC())
+})
 
 const mapStateToProps = (state, originalProps) => ({
   onlineOrders: state.online,
@@ -169,4 +82,4 @@ const mapStateToProps = (state, originalProps) => ({
   originalProps
 })
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aws-iot-device-sdk": "^2.2.1",
     "bootstrap": "^4.0.0",
     "material-ui": "^0.20.0",
     "ramda": "^0.25.0",

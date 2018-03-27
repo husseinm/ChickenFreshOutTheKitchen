@@ -1,0 +1,43 @@
+service: chickenfreshoutthekitchen
+
+# Use serverless-webpack plugin to transpile ES6/ES7
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+# Configuration for serverless-webpack
+# Enable auto-packing of external modules
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  stage: dev
+  region: us-east-1
+  environment:
+      LOCATION_ID: ${file(secret.json):LOCATION_ID}
+      SQUARE_SECRET: ${file(secret.json):SQUARE_SECRET}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - 'iot:DescribeEndpoint'
+      Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - 'sts:AssumeRole'
+      Resource: "*"
+
+functions:
+  handleWebhooks:
+    handler: handler.handleWebhooks
+    events:
+      - http: POST webhook
+  auth:
+    handler: handler.auth
+    events:
+      - http: GET iot/keys
+    memorySize: 128
+    timeout: 10
