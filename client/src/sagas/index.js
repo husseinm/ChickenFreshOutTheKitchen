@@ -30,7 +30,12 @@ const IoT = {
 }
 
 const handleServerMessage = (topic, message, packet) => {
-    console.log(JSON.parse(new TextDecoder('utf-8').decode(message)))
+    const data = JSON.parse(new TextDecoder('utf-8').decode(message))
+
+    if (data.type === 'order') {
+
+    }
+    console.log()
 }
 
 
@@ -40,7 +45,7 @@ export default function* sagas() {
 }
 
 function* connectToServer() {
-    const keys = yield (yield call(fetch, 'http://localhost:3001/iot/keys')).json()
+    const keys = yield (yield call(fetch, 'https://78ct2v2kqh.execute-api.us-east-1.amazonaws.com/dev/iot/keys')).json()
     console.log("Test?")
     IoT.connect('/tabulehcafe', keys.iotEndpoint, keys.region, keys.accessKey, keys.secretKey, keys.sessionToken)
 }
