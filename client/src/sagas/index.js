@@ -33,9 +33,8 @@ const handleServerMessage = (topic, message, packet) => {
     const data = JSON.parse(new TextDecoder('utf-8').decode(message))
 
     if (data.type === 'order') {
-
+        console.log(data.payload)
     }
-    console.log()
 }
 
 
