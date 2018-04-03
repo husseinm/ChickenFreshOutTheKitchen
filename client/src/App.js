@@ -10,6 +10,7 @@ import OrderCards from './components/OrderCards';
 import './App.css';
 
 class App extends Component {
+  /*******The Actual app******/
   componentDidMount() {
     this.props.connectToServer()
   }
@@ -69,6 +70,24 @@ class App extends Component {
       </MuiThemeProvider>
     )
   }
+  /*******A generic timer*******
+  constructor (props) {
+    super(props)
+    this.state = {count: 1}
+    clearInterval(this.timer)
+    this.timer = setInterval(this.tick.bind(this), 1000)
+  }
+  tick () {
+    this.setState({count: (this.state.count + 1)})
+  }
+  render () {
+    return (
+      <div >
+        <h1>{this.state.count}</h1>
+      </div>
+    )
+  }
+  /****************************/
 }
 
 const mapDispatchToProps = (dispatch, originalProps) => ({

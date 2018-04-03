@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
+import Counter from './Counter'
 /*
   Original Card component using Bootstrap
 */
@@ -38,12 +38,13 @@ const OrderCard = ({ order, markOrderComplete }) => (
       actAsExpander={true}
       showExpandableButton={true}
       >
+      <Counter />
     </CardHeader>
     <CardTitle
       title={order.title}
     />
     <CardText expandable={true}>
-      {order.detailsList}
+      <p>{order.detailsList}</p>
     </CardText>
     <CardActions>
       <RaisedButton fullWidth={true} label="Order Complete" onClick={() => markOrderComplete(order.id)}/>
