@@ -23,7 +23,7 @@ provider:
   iamRoleStatements:
     - Effect: "Allow"
       Action:
-        - 'iot:DescribeEndpoint'
+        - 'iot:*'
       Resource: "*"
     - Effect: "Allow"
       Action:

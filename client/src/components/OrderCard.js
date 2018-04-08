@@ -47,7 +47,7 @@ const OrderCard = ({ order, markOrderComplete }) => (
       <p>{order.detailsList}</p>
     </CardText>
     <CardActions>
-      <RaisedButton fullWidth={true} label="Order Complete" onClick={() => markOrderComplete(order.id)}/>
+      <RaisedButton fullWidth={true} label="Order Complete" onClick={() => markOrderComplete(order)}/>
     </CardActions>
   </Card>
   </MuiThemeProvider>
