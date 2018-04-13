@@ -38,13 +38,23 @@ const OrderCard = ({ order, markOrderComplete }) => (
       actAsExpander={true}
       showExpandableButton={true}
       >
-      <Counter />
+    <Counter />
+
     </CardHeader>
-    <CardTitle
-      title={order.title}
+    <CardTitle              
+      title={
+        order.items.map(function(item, i) {
+          return <li key={i}>{item.name}</li>
+        })        
+      }
     />
     <CardText expandable={true}>
-      <p>{order.detailsList}</p>
+      {/* <p>{order.items.toString()}</p> */}
+      <p>{
+      order.items.map(function(item, i) {
+          return <li key={i}>{item.modifiers.toString()}</li>
+        })
+      }</p>
     </CardText>
     <CardActions>
       <RaisedButton fullWidth={true} label="Order Complete" onClick={() => markOrderComplete(order)}/>
