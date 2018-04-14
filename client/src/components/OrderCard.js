@@ -38,8 +38,7 @@ const OrderCard = ({ order, markOrderComplete }) => (
       actAsExpander={true}
       showExpandableButton={true}
       >
-    <Counter />
-
+      <Counter timePlaced="04/14/2018 00:57:30"/>
     </CardHeader>
     <CardTitle              
       title={
