@@ -26,6 +26,7 @@ class App extends Component {
       <MuiThemeProvider>
         <AppBar
           title="ChickenFreshOutTheKitchen"
+          style={{ backgroundColor: '#212121' }}
         />
 
         <div className="App">
