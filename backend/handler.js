@@ -67,6 +67,7 @@ const getAllFinishedOrders = () => new Promise((resolve, reject) => {
   })
 })
 
+// TODO: IAM & Proper CORS
 export const getAdminPanel = async (event, context, callback) => {
   try {
     const completedOrdersObj = await getAllFinishedOrders()
@@ -96,15 +97,28 @@ export const getAdminPanel = async (event, context, callback) => {
 
     // Calculate 
     return callback(null, {
-      status: true,
-      avgOrderTime: getAverageOfOrderCompletionTimes(flatCompletedOrders),
-      avgOrderTimeRecent: getAverageOfOrderCompletionTimes(allOrdersRecent),
-      dayByDayOrderCompletionTimes: R.map(getAverageOfOrderCompletionTimes)(completedOrdersByDay),
-      dayByDayOrderCount: R.map(R.compose(R.length, flattenOrderCompletionTimes))(completedOrdersByDay)
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({
+        status: true,
+        avgOrderTime: getAverageOfOrderCompletionTimes(flatCompletedOrders),
+        avgOrderTimeRecent: getAverageOfOrderCompletionTimes(allOrdersRecent),
+        dayByDayOrderCompletionTimes: R.map(getAverageOfOrderCompletionTimes)(completedOrdersByDay),
+        dayByDayOrderCount: R.map(R.compose(R.length, flattenOrderCompletionTimes))(completedOrdersByDay)
+      })
     })
   } catch (e) {
     console.log("Fail: ", e)
-    return callback(e, { status: false })
+
+    return callback(null, {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({ status: false })
+    })
   }
 }
 
