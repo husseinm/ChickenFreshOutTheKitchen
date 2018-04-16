@@ -23,6 +23,10 @@ provider:
   iamRoleStatements:
     - Effect: "Allow"
       Action:
+        - 'dynamodb:*'
+      Resource: "arn:aws:dynamodb:us-east-1:050463389957:table/chickenfreshoutthekitchen_finished_orders"
+    - Effect: "Allow"
+      Action:
         - 'iot:*'
       Resource: "*"
     - Effect: "Allow"
@@ -31,6 +35,10 @@ provider:
       Resource: "*"
 
 functions:
+  getAdminPanel:
+    handler: handler.getAdminPanel
+    events:
+      - http: GET admin_panel
   handleWebhooks:
     handler: handler.handleWebhooks
     events:
