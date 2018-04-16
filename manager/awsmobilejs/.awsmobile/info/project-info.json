@@ -1,0 +1,23 @@
+{
+	"ProjectName": "manager",
+	"ProjectPath": "/Users/mahdi/Documents/personal_code/js/ChickenFreshOutTheKitchen/manager",
+	"SourceDir": "src",
+	"DistributionDir": "build",
+	"BuildCommand": "npm run-script build",
+	"StartCommand": "npm run-script start",
+	"InitializationTime": "2018-04-16-18-01-37",
+	"LastConfigurationTime": "2018-04-16-18-01-55",
+	"LastNPMInstallTime": "",
+	"FrontendLastBuildTime": "",
+	"LastPublishTime": "",
+	"BackendFormat": "yml",
+	"BackendLastSyncTime": "2018-04-16-18-14-02",
+	"BackendLastBuildTime": "",
+	"BackendLastPushTime": "",
+	"BackendLastPushSuccessful": false,
+	"BackendProjectID": "201973bc-e23b-4d2d-a682-0e210aca48a9",
+	"BackendProjectName": "ChickenFreshOutTheKitchen_Admin",
+	"BackendProjectConsoleUrl": "https://console.aws.amazon.com/mobilehub/home#/201973bc-e23b-4d2d-a682-0e210aca48a9/build",
+	"BackendProjectCreationTime": "2018-04-16T18:50:41.797Z",
+	"BackendProjectLastUpdatedTime": "2018-04-16T22:13:31.579Z"
+}
