@@ -10,13 +10,10 @@ const dynamo = new DynamoDB({ region: 'us-east-1' })
 // TODO: Add HMAC signing for security
 
 // TODO:
-//
-// Why is shadow not updating with current data or constantly being ocrrected?
-// Remove from shadow on click.
-//
-// Average Order Time
-// Order time over last 3 hours
-// last weeks order count by day in array
+// 1. Why aren't orders coming in?
+// 2. Why is shadow not updating with current data or constantly being ocrrected?
+// 3. Remove from shadow on click.
+// 5. Auto-refresh admin & capitalize first letter of name
 
 
 const isValidRequest = event => {
@@ -31,7 +28,7 @@ const fetchSquare = async endpoint => fetch(`https://connect.squareup.com/v1/${p
 
 const getPaymentById = async paymentId => fetchSquare(`/payments/${paymentId}`)
 
-const wasOrderRefunded = o => o.refunded_money.amount < 0
+const wasOrderRefunded = o => o.refunded_money.amount > 0
 const generatePayloadFromSquareOrder = order => {
   const processItems = R.pipe(
     R.filter(i => i.itemization_type === "ITEM"),
@@ -131,6 +128,7 @@ export const handleWebhooks = async (event, context, callback) => {
 
   if (eventType === 'PAYMENT_UPDATED') {
     const squareOrder = await getPaymentById(id)
+    console.log(squareOrder)
 
     if (wasOrderRefunded(squareOrder)) {
       removeFromDeviceShadow(squareOrder.id)

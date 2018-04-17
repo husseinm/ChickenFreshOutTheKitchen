@@ -46,12 +46,20 @@ class App extends Component {
         status: false
       }
     }
+
+    this.getLatestDataFromServer = this.getLatestDataFromServer.bind(this)
   }
 
-  componentDidMount() {
+  getLatestDataFromServer() {
     fetch('https://78ct2v2kqh.execute-api.us-east-1.amazonaws.com/dev/admin_panel').then(r => r.json()).then(stats => {
       this.setState({ stats })
     })
+  }
+
+  // Get latest data & constantly update it every 60 seconds
+  componentDidMount() {
+    this.getLatestDataFromServer()
+    setInterval(this.getLatestDataFromServer, 60000)
   }
 
   render() {
