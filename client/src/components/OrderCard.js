@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Counter from './Counter'
+import Counter from './Counter';
+import moment from 'moment';
 /*
   Original Card component using Bootstrap
 */
@@ -31,14 +32,14 @@ const OrderCard = ({ order, markOrderComplete }) => (
   <Card
     style={{
       margin: '0 auto',
-      border: '2px solid #424242',
+      border: '2px solid #424242'
     }}>
     <CardHeader
       title={order.id}
       actAsExpander={true}
       showExpandableButton={true}
       >
-      <Counter timePlaced="04/14/2018 00:57:30"/>
+    <Counter timePlaced={moment(order.created_at).format("MM/DD/YYYY HH:mm:ss")} />
     </CardHeader>
     <CardTitle              
       title={
@@ -51,7 +52,7 @@ const OrderCard = ({ order, markOrderComplete }) => (
       {/* <p>{order.items.toString()}</p> */}
       <p>{
       order.items.map(function(item, i) {
-          return <li key={i}>{item.modifiers.toString()}</li>
+          return <li key={i}>{item.modifiers.join(', ')}</li>
         })
       }</p>
     </CardText>

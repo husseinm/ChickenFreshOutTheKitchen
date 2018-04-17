@@ -28,7 +28,6 @@ class App extends Component {
           title="ChickenFreshOutTheKitchen"
           style={{ backgroundColor: '#212121' }}
         />
-
         <div className="App">
           <div className="sub-title">
             <div className="container">
@@ -36,31 +35,19 @@ class App extends Component {
                 <div className="col-sm col1 rounded">
                   <h4>Online</h4>
                   <div className="container">
-                    <div className="row sub-sections">
-                      <div className="col-xs orders">
-                        <OrderCards orders={onlineOrders} />
-                      </div>
-                    </div>
+                    <OrderCards orders={onlineOrders} />
                   </div>
                 </div>
                 <div className="col-sm col2 rounded">
                   <h4>In-store</h4>
                   <div className="container">
-                    <div className="row sub-sections">
-                      <div className="col-xs orders">
-                        <OrderCards orders={instoreOrders} />
-                      </div>
-                    </div>
+                    <OrderCards orders={instoreOrders} />
                   </div>
                 </div>
                 <div className="col-sm col3 rounded">
                   <h4>Pickup</h4>
                   <div className="container">
-                    <div className="row sub-sections">
-                      <div className="col-xs orders">
-                        <OrderCards orders={pickupOrders} />
-                      </div>
-                    </div>
+                    <OrderCards orders={pickupOrders} />
                   </div>
                 </div>
               </div>
