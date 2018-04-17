@@ -2,6 +2,7 @@ import R from 'ramda'
 import { addToDeviceShadow, removeFromDeviceShadow, getIoTDeviceToken } from './iot'
 import { DynamoDB } from 'aws-sdk';
 import moment from 'moment'
+import axios from 'axios'
 
 const dynamo = new DynamoDB({ region: 'us-east-1' })
 
@@ -10,22 +11,20 @@ const dynamo = new DynamoDB({ region: 'us-east-1' })
 // TODO: Add HMAC signing for security
 
 // TODO:
-// 1. Why aren't orders coming in?
-// 2. Why is shadow not updating with current data or constantly being ocrrected?
-// 3. Remove from shadow on click.
+// 1. Online being troublesome
 
 
 const isValidRequest = event => {
   return true;
 }
 
-const fetchSquare = async endpoint => fetch(`https://connect.squareup.com/v1/${process.env.LOCATION_ID}${endpoint}`, {
+const fetchSquare = endpoint => axios(`https://connect.squareup.com/v1/${process.env.LOCATION_ID}${endpoint}`, {
   headers: {
     Authorization: `Bearer ${process.env.SQUARE_SECRET}`
   }
-}).then(r => r.json())
+})
 
-const getPaymentById = async paymentId => fetchSquare(`/payments/${paymentId}`)
+const getPaymentById = paymentId => fetchSquare(`/payments/${paymentId}`)
 
 const wasOrderRefunded = o => o.refunded_money.amount > 0
 const generatePayloadFromSquareOrder = order => {
@@ -63,6 +62,14 @@ const getAllFinishedOrders = () => new Promise((resolve, reject) => {
   })
 })
 
+const generateResponse = (b) => ({
+  statusCode: 200,
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  },
+  body: JSON.stringify(b)
+})
+
 // TODO: IAM & Proper CORS
 export const getAdminPanel = async (event, context, callback) => {
   try {
@@ -92,29 +99,17 @@ export const getAdminPanel = async (event, context, callback) => {
     const allOrdersRecent = R.filter(o => o.createdAt.isAfter(moment().subtract(12, 'hours')))(flatCompletedOrders)
 
     // Calculate 
-    return callback(null, {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify({
-        status: true,
-        avgOrderTime: getAverageOfOrderCompletionTimes(flatCompletedOrders),
-        avgOrderTimeRecent: getAverageOfOrderCompletionTimes(allOrdersRecent),
-        dayByDayOrderCompletionTimes: R.map(getAverageOfOrderCompletionTimes)(completedOrdersByDay),
-        dayByDayOrderCount: R.map(R.compose(R.length, flattenOrderCompletionTimes))(completedOrdersByDay)
-      })
-    })
+    return callback(null, generateResponse({
+      status: true,
+      avgOrderTime: getAverageOfOrderCompletionTimes(flatCompletedOrders),
+      avgOrderTimeRecent: getAverageOfOrderCompletionTimes(allOrdersRecent),
+      dayByDayOrderCompletionTimes: R.map(getAverageOfOrderCompletionTimes)(completedOrdersByDay),
+      dayByDayOrderCount: R.map(R.compose(R.length, flattenOrderCompletionTimes))(completedOrdersByDay)
+    }))
   } catch (e) {
     console.log("Fail: ", e)
 
-    return callback(null, {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify({ status: false })
-    })
+    return callback(null, generateResponse({ status: false }))
   }
 }
 
@@ -122,32 +117,28 @@ export const handleWebhooks = async (event, context, callback) => {
   const { entity_id: id, location_id: locationId, event_type: eventType } = JSON.parse(event.body)
 
   // If not from Square OR not for the Tabuleh Cafe, drop it.
-  if (locationId !== process.env.LOCATION_ID || !isValidRequest())
-    return callback(null, { status: false, message: 'Invalid Request' })
+  if (locationId === process.env.LOCATION_ID && isValidRequest()) {
+    if (eventType === 'PAYMENT_UPDATED') {
+      const squareOrder = (await getPaymentById(id)).data
 
-  if (eventType === 'PAYMENT_UPDATED') {
-    const squareOrder = await getPaymentById(id)
-    console.log(squareOrder)
-
-    if (wasOrderRefunded(squareOrder)) {
-      removeFromDeviceShadow(squareOrder.id)
+      if (wasOrderRefunded(squareOrder)) {
+        removeFromDeviceShadow(squareOrder.id)
+      } else {
+        addToDeviceShadow(generatePayloadFromSquareOrder(squareOrder))
+      }
     } else {
-      addToDeviceShadow(generatePayloadFromSquareOrder(squareOrder))
+      console.log("Unsupported Event Type: ", eventType)
     }
   } else {
-    return callback(null, { status: false, message: 'Unhandled Event Type' })
+    console.log("Invalid Message OR Location ID")
   }
+
+  return callback(null, generateResponse({}))
 }
 
 export const auth = (event, context, callback) => {
   try {
-    getIoTDeviceToken().then(b => callback(null, {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify(b)
-    }));
+    getIoTDeviceToken().then(b => callback(null, generateResponse(b)));
   } catch (e) {
     callback(e)
   }
