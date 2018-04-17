@@ -31,7 +31,7 @@ const OrderCard = ({ order, markOrderComplete }) => (
   <Card
     style={{
       margin: '0 auto',
-      border: '2px solid #424242',
+      border: '2px solid #424242'
     }}>
     <CardHeader
       title={order.id}
@@ -51,7 +51,7 @@ const OrderCard = ({ order, markOrderComplete }) => (
       {/* <p>{order.items.toString()}</p> */}
       <p>{
       order.items.map(function(item, i) {
-          return <li key={i}>{item.modifiers.toString()}</li>
+          return <li key={i}>{item.modifiers.join(', ')}</li>
         })
       }</p>
     </CardText>
