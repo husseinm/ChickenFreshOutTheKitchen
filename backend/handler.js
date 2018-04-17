@@ -89,7 +89,7 @@ export const getAdminPanel = async (event, context, callback) => {
     const flatCompletedOrders = R.reduce(R.concat, [])(Object.values(completedOrdersByDay))
 
     // Recent is 12 hours
-    const allOrdersRecent = R.filter(o => o.createdAt.isBefore(moment().add(12, 'hours')))(flatCompletedOrders)
+    const allOrdersRecent = R.filter(o => o.createdAt.isAfter(moment().subtract(12, 'hours')))(flatCompletedOrders)
 
     // Calculate 
     return callback(null, {
