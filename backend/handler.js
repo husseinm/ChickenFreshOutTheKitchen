@@ -13,7 +13,6 @@ const dynamo = new DynamoDB({ region: 'us-east-1' })
 // 1. Why aren't orders coming in?
 // 2. Why is shadow not updating with current data or constantly being ocrrected?
 // 3. Remove from shadow on click.
-// 5. Auto-refresh admin & capitalize first letter of name
 
 
 const isValidRequest = event => {
