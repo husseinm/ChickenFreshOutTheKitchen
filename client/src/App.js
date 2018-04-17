@@ -32,24 +32,24 @@ class App extends Component {
           <div className="sub-title">
             <div className="container">
               <div className="row sections">
-                <div className="col-sm col1 rounded">
+                {/* <div className="col-sm col1 rounded">
                   <h4>Online</h4>
                   <div className="container">
                     <OrderCards orders={onlineOrders} />
                   </div>
-                </div>
+                </div> */}
                 <div className="col-sm col2 rounded">
                   <h4>In-store</h4>
                   <div className="container">
                     <OrderCards orders={instoreOrders} />
                   </div>
                 </div>
-                <div className="col-sm col3 rounded">
+                {/* <div className="col-sm col3 rounded">
                   <h4>Pickup</h4>
                   <div className="container">
                     <OrderCards orders={pickupOrders} />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

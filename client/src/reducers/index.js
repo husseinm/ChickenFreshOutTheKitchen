@@ -11,7 +11,7 @@ const defaultState = {
 const orderReducer = (state = defaultState, action) => {
   switch(action.type) {
     case OrderActionNames.ReceivedOrdersCompleteSuccess: {
-      const orders = Object.values(action.orders)
+      const orders = R.reject(R.isNil)(Object.values(action.orders))
 
       // TODO: Get distinction of order source/going
       return Object.assign({}, state, {

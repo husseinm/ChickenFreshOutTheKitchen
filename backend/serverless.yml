@@ -35,6 +35,8 @@ provider:
       Resource: "*"
 
 functions:
+  finishOrder:
+    handler: handler.finishOrder
   getAdminPanel:
     handler: handler.getAdminPanel
     events:

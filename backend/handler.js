@@ -12,6 +12,7 @@ const dynamo = new DynamoDB({ region: 'us-east-1' })
 
 // TODO:
 // 1. Online being troublesome
+// 2. Fix closing of orders
 
 
 const isValidRequest = event => {
@@ -111,6 +112,10 @@ export const getAdminPanel = async (event, context, callback) => {
 
     return callback(null, generateResponse({ status: false }))
   }
+}
+
+export const finishOrder = (event, context, callback) => {
+  removeFromDeviceShadow(event.orderId)
 }
 
 export const handleWebhooks = async (event, context, callback) => {

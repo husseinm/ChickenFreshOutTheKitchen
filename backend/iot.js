@@ -44,7 +44,7 @@ export const addToDeviceShadow = obj => getShadow().then(currentState => {
 })
 
 export const removeFromDeviceShadow = id => getShadow().then(currentState => {
-    return updateShadow(R.dissoc(id, currentState))
+    return updateShadow(R.assoc(id, null, currentState))
 })
 
 export const getIoTDeviceToken = () => initializeIoT().then(() => new Promise((resolve, reject) => {
